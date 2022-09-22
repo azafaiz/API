@@ -8,30 +8,30 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema absensi
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema absensi
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `absensi` DEFAULT CHARACTER SET utf8 ;
+USE `absensi` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Role`
+-- Table `absensi`.`Role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Role` (
-  `id` INT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `absensi`.`Role` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `role` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`User`
+-- Table `absensi`.`User`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`User` (
-  `id` INT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `absensi`.`User` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `Role_id` INT NOT NULL,
@@ -40,41 +40,41 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User` (
   INDEX `fk_User_Role_idx` (`Role_id` ASC) VISIBLE,
   CONSTRAINT `fk_User_Role`
     FOREIGN KEY (`Role_id`)
-    REFERENCES `mydb`.`Role` (`id`)
+    REFERENCES `absensi`.`Role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`absen`
+-- Table `absensi`.`absen`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`absen` (
-  `id` INT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `absensi`.`absen` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `created` TIMESTAMP NULL,
   `User_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_absen_User1_idx` (`User_id` ASC) VISIBLE,
   CONSTRAINT `fk_absen_User1`
     FOREIGN KEY (`User_id`)
-    REFERENCES `mydb`.`User` (`id`)
+    REFERENCES `absensi`.`User` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`kelas`
+-- Table `absensi`.`kelas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`kelas` (
-  `id` INT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `absensi`.`kelas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nama_kelas` VARCHAR(45) NULL,
   `User_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_kelas_User1_idx` (`User_id` ASC) VISIBLE,
   CONSTRAINT `fk_kelas_User1`
     FOREIGN KEY (`User_id`)
-    REFERENCES `mydb`.`User` (`id`)
+    REFERENCES `absensi`.`User` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
